@@ -1,0 +1,51 @@
+In this Power Bi Project, we will be doing  data analysis for Super store Data .
+We have Six CSV files-
+1.Sales
+2.Stores
+3.Customers
+4.Data Dictionary
+5.Exchange Rates
+6.Products.
+
+
+When you load the files in Power BI,raw data has some errors.We need to review all the files for any issues (duplicacy,empty fields,error values).
+
+
+Cleaning & Transforming-
+1.Removing errors in "Sales" File.
+2.Removing empty values in "Sales" file for Delivery Date".
+3.Changing date type format for "Delivery Date" from text to Date in "Sales" file.
+4.Making first row as header in "Data Dictionary".
+5.Value of "Cost per unit" & "Price per unit" is in Text due to "$" sign,split the Column through Delimiter,which will create the column in Number data type.
+
+
+Using DAX queries for making additional columns-
+(a)Sales-
+1.Getting Delivery time(Order date-delivery date)-
+DeliveryTime = DATEDIFF('Sales'[Order Date],'Sales'[Delivery Date],DAY)
+
+
+(b)Customers-
+1.Calculating Age from Birth Date -
+Age = DATEDIFF('Customers'[Birthday],TODAY(),YEAR)
+
+
+(c)Products-
+1.Calculating Profit per unit-
+Profit per Unit = 'Products'[Unit Price USD]-'Products'[Unit Cost USD]
+
+
+(d)Stores-
+1.Identifying Type based on size of store-
+Store Size = SWITCH(
+TRUE(),
+'Stores'[Square Meters]<=800,"Small",
+'Stores'[Square Meters]<=1600 && 'Stores'[Square Meters]>=800,"Medium",
+'Stores'[Square Meters]>=1600,"Big",
+"unknown"
+)
+
+
+
+
+
